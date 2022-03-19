@@ -1,9 +1,8 @@
 from flask import Flask, request, jsonify, escape
-
 from ClientMongoDB import MongoDBClient
-# from waitress import serve
-
-
+from flask_sslify import SSLify
+import requests
+import json
 
 app = Flask(__name__)
 
@@ -15,13 +14,14 @@ def post_request(tweet_id):
     # if exist in database
     response = MongoDBClient().read_db({"id": tweet_id})
     if response is None:
-        # there we execute the AI class
-        print("Executing class")
+        resp = request.get(f"https://fdd3-34-136-46-201.ngrok.io/?id={tweet_id}&fbclid=IwAR0OGQZ25H5zaBptAhLh7nIKBqWSD5cAnhp4p6BUPYBQK9D-ZMD1N-Shezs")
+        prob = resp.json()['prob']
+        response = {"id": tweet_id, "model_output": prob}
+        MongoDBClient().update_db(response)
+        return jsonify(response)
 
     else:
         return jsonify({response['id']: response['model_output']})
-
-
 
 
 if __name__ == '__main__':
