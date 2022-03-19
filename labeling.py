@@ -9,18 +9,18 @@ from icecream import ic
 ic.configureOutput(prefix='')
 
 # Backups directory (after each 10 labels backup is created)
-if not path.exists('backup'):
-    os.mkdir('backup')
+if not path.exists('/home/obukowski/Desktop/hackathon/backup'):
+    os.mkdir('/home/obukowski/Desktop/hackathon/backup')
 
-unlabeled_df = pd.read_csv('2.csv')
+unlabeled_df = pd.read_csv('3.csv')
 
 # Index of last labeled tweet if script terminated runtime
 # Existence of this file indicates that backup was created
 # If exists saved state is loaded
-if path.exists('backup/state'):
-    with open('backup/state', 'rb') as f:
+if path.exists('/home/obukowski/Desktop/hackathon/backup/state'):
+    with open('/home/obukowski/Desktop/hackathon/backup/state', 'rb') as f:
         start_index, ones, zeros = pkl.load(f)
-    out_df = pd.read_csv('labeled.csv')
+    out_df = pd.read_csv('/home/obukowski/Desktop/hackathon/labeled.csv')
 else:
     start_index = 0
     ones = 0
@@ -46,7 +46,7 @@ for i, tweet in enumerate(unlabeled_df.loc[start_index:].iterrows()):
         continue
     
     elif label == 999:
-        out_df.to_csv('labeled.csv', index=False)
+        out_df.to_csv('/home/obukowski/Desktop/hackathon/labeled.csv', index=False)
         print(out_df)
         with open('backup/state', 'wb') as f:
             pkl.dump((i - 1, ones, zeros), f)
@@ -63,11 +63,11 @@ for i, tweet in enumerate(unlabeled_df.loc[start_index:].iterrows()):
         os.system('clear')
     
         if i%10 == 0 and i > 0:
-            with open('backup/state', 'wb') as f:
+            with open('/home/obukowski/Desktop/hackathon/backup/state', 'wb') as f:
                 pkl.dump((i + 1, ones, zeros), f)
-            out_df.to_csv(f'backup/backup_{i//10}', index=False)
+            out_df.to_csv(f'/home/obukowski/Desktop/hackathon/backup/backup_{i//10}', index=False)
 
-out_df.to_csv('labeled.csv', index=False)
+out_df.to_csv('/home/obukowski/Desktop/hackathon/labeled.csv', index=False)
 
 # Uwwagi: ... na końcu tweeta to retweet, chyba najlepiej discardowac
 # Jezeli to są jakieś retweety do jakiegos trolla to zapiszcie gdziekolwiek jego nick to się sprawdzi jego konto
