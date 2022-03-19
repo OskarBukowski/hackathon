@@ -1,7 +1,7 @@
 from flask import Flask, request, jsonify, escape
 
 from ClientMongoDB import MongoDBClient
-from waitress import serve
+# from waitress import serve
 
 
 
@@ -26,4 +26,4 @@ def post_request(tweet_id):
 
 
 if __name__ == '__main__':
-    serve(app, host='0.0.0.0', port=80)
+    app.run(host='0.0.0.0', port=5000, ssl_context=('cert.pem', 'key.pem'))
