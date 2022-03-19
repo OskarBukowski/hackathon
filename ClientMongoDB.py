@@ -2,7 +2,7 @@ from pymongo import MongoClient
 from pprint import pprint
 
 client = MongoClient(
-    "mongodb+srv://obukowski:cKeZ8bMmChydetKt@cluster0.oblol.mongodb.net/main?retryWrites=true&w=majority")
+    "mongodb+srv://obukowski:cKeZ8bMmChydetKt@cluster2.l4m5p.mongodb.net/main?retryWrites=true&w=majority")
 
 db = client.main
 collection = db.tweet_with_model_output
@@ -11,7 +11,7 @@ collection = db.tweet_with_model_output
 
 insert = {"id": 12345678, "model_output": 1.0}
 
-# db.tweet_with_model_output.insert_one(insert)
+db.tweet_with_model_output.insert_one(insert)
 
 
 ### FIND ENTRY BY ID
@@ -19,7 +19,7 @@ insert = {"id": 12345678, "model_output": 1.0}
 response = db.tweet_with_model_output.find_one({"id": 12345678})
 
 
-# print(response)
+print(response)
 
 
 class MongoDBClient:
