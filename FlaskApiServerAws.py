@@ -2,12 +2,6 @@ from flask import Flask, request, jsonify, escape
 
 from ClientMongoDB import MongoDBClient
 # from waitress import serve
-from OpenSSL import SSL
-
-context = SSL.Context(SSL.TLSv1_2_METHOD)
-context.use_certificate('cert.pem')
-context.use_privatekey('key.pem')
-
 
 
 
@@ -31,4 +25,4 @@ def post_request(tweet_id):
 
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5000, ssl_context=context)
+    app.run(host='0.0.0.0', port=5000, ssl_context='adhoc')
