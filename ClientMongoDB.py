@@ -41,4 +41,4 @@ class MongoDBClient:
         return self.db.dropIndexes("*")
 
 
-MongoClient().drop_document({"id": 12345678})
+# MongoClient().drop_document({"id": 12345678})
