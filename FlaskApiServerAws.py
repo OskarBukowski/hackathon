@@ -12,7 +12,8 @@ def post_request(tweet_id):
     try:
         response = MongoDBClient().read_db({"id": str(tweet_id)})
         if response is None:
-            resp = requests.get("https://b179-34-136-46-201.ngrok.io/?id={}&fbclid=IwAR3sf6-j79VVRWK-l2DXrEypzM0PmDhcf8Zni5vYEE0skK0q4PNQytfXtAs".format(tweet_id))
+            resp = requests.get("https://1b6e-34-136-46-201.ngrok.io/?id={}&fbclid=IwAR2UfyhWnl2uqAVN_6OLcZsIh0_lNdyRmKPNf-dlaFAEFD1ngVm_BWRqdhE".format(tweet_id))
+
             response = {"id": str(tweet_id), "model_output": resp.json()["prob"]}
             MongoDBClient().update_db(response)
             return json.loads(dumps({str(tweet_id): resp.json()["prob"]}))
