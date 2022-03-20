@@ -2,24 +2,21 @@ from pymongo import MongoClient
 from pprint import pprint
 
 
-# client = MongoClient(
-#     "mongodb+srv://obukowski:cKeZ8bMmChydetKt@cluster2.l4m5p.mongodb.net/main?retryWrites=true&w=majority")
-#
-# db = client.main
+client = MongoClient(
+    "mongodb+srv://obukowski:cKeZ8bMmChydetKt@cluster2.l4m5p.mongodb.net/main?retryWrites=true&w=majority")
+
+db = client.main
 # collection = db.tweet_with_model_output
 
 ### EXAMPLE ENTRY
 
-# insert = {"id": 565638900, "model_output": 1.0}
-
-# db.tweet_with_model_output.insert_one(insert)
+insert = {"id": 1504800156851621888, "model_output": 0.3423}
+db.tweet_with_model_output.insert_one(insert)
 
 
 ### FIND ENTRY BY ID
 
 # response = db.tweet_with_model_output.find_one({"id": 12345678})
-
-
 # print(response)
 
 
