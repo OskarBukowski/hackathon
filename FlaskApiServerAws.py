@@ -9,10 +9,10 @@ app = Flask(__name__)
 
 @app.route('/id/<int:tweet_id>', methods=['GET'])
 def post_request(tweet_id):
-    response = MongoDBClient().read_db({"id": tweet_id})
+    response = MongoDBClient().read_db({"id": str(tweet_id)})
     if response is None:
         resp = requests.get("https://fdd3-34-136-46-201.ngrok.io/?id={}&fbclid=IwAR0OGQZ25H5zaBptAhLh7nIKBqWSD5cAnhp4p6BUPYBQK9D-ZMD1N-Shezs".format(tweet_id))
-        response = {str(tweet_id): resp.json()["prob"]}
+        response = {"id": str(tweet_id), "model_output": resp.json()["prob"]}
         MongoDBClient().update_db(response)
         return json.loads(dumps({str(tweet_id): resp.json()["prob"]}))
 
